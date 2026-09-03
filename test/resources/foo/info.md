@@ -1,0 +1,1 @@
+This directory was used during development for various ad-hoc testing purposes. All such cases should be covered by the unit tests, but this file is left in the event it is needed in the future. It is also useful to use this, and log the parse structure when implementing new features.

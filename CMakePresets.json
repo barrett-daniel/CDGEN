@@ -1,0 +1,91 @@
+{
+  "version": 6,
+  "cmakeMinimumRequired": { "major": 3, "minor": 21, "patch": 0 },
+  "configurePresets": [
+    {
+      "name": "base",
+      "hidden": true,
+      "binaryDir": "${sourceDir}/build/${presetName}"
+    },
+
+    {
+      "name": "macos-x64",
+      "inherits": "base",
+      "hidden": true,
+      "generator": "Ninja",
+      "cacheVariables": { "VCPKG_TARGET_TRIPLET": "x64-osx" },
+      "condition": { "type": "equals", "lhs": "${hostSystemName}", "rhs": "Darwin" }
+    },
+    {
+      "name": "macos-arm64",
+      "inherits": "base",
+      "hidden": true,
+      "generator": "Ninja",
+      "cacheVariables": { "VCPKG_TARGET_TRIPLET": "arm64-osx" },
+      "condition": { "type": "equals", "lhs": "${hostSystemName}", "rhs": "Darwin" }
+    },
+
+    {
+      "name": "windows-mingw",
+      "inherits": "base",
+      "hidden": true,
+      "generator": "Ninja",
+      "cacheVariables": {
+        "VCPKG_TARGET_TRIPLET": "x64-mingw-dynamic",
+        "CMAKE_CXX_COMPILER": "g++"
+      },
+      "condition": { "type": "equals", "lhs": "${hostSystemName}", "rhs": "Windows" }
+    },
+
+    {
+      "name": "windows-arm64",
+      "inherits": "base",
+      "hidden": true,
+      "generator": "Visual Studio 17 2022",
+      "architecture": { "value": "ARM64", "strategy": "set" },
+      "cacheVariables": { "VCPKG_TARGET_TRIPLET": "arm64-windows" },
+      "condition": { "type": "equals", "lhs": "${hostSystemName}", "rhs": "Windows" }
+    },
+
+    {
+      "name": "linux-x64",
+      "inherits": "base",
+      "hidden": true,
+      "generator": "Ninja",
+      "cacheVariables": {
+        "VCPKG_TARGET_TRIPLET": "x64-linux",
+        "CMAKE_CXX_COMPILER": "g++"
+      },
+      "condition": { "type": "equals", "lhs": "${hostSystemName}", "rhs": "Linux" }
+    },
+    {
+      "name": "linux-arm64",
+      "inherits": "base",
+      "hidden": true,
+      "generator": "Ninja",
+      "cacheVariables": {
+        "VCPKG_TARGET_TRIPLET": "arm64-linux",
+        "CMAKE_CXX_COMPILER": "g++"
+      },
+      "condition": { "type": "equals", "lhs": "${hostSystemName}", "rhs": "Linux" }
+    },
+
+    { "name": "macos-x64-debug",      "displayName": "macOS x64 Debug",       "inherits": "macos-x64",      "cacheVariables": { "CMAKE_BUILD_TYPE": "Debug" } },
+    { "name": "macos-x64-release",    "displayName": "macOS x64 Release",     "inherits": "macos-x64",      "cacheVariables": { "CMAKE_BUILD_TYPE": "Release" } },
+
+    { "name": "macos-arm64-debug",    "displayName": "macOS arm64 Debug",     "inherits": "macos-arm64",    "cacheVariables": { "CMAKE_BUILD_TYPE": "Debug" } },
+    { "name": "macos-arm64-release",  "displayName": "macOS arm64 Release",   "inherits": "macos-arm64",    "cacheVariables": { "CMAKE_BUILD_TYPE": "Release" } },
+
+    { "name": "windows-mingw-debug",  "displayName": "Windows MinGW Debug",   "inherits": "windows-mingw",  "cacheVariables": { "CMAKE_BUILD_TYPE": "Debug" } },
+    { "name": "windows-mingw-release","displayName": "Windows MinGW Release", "inherits": "windows-mingw",  "cacheVariables": { "CMAKE_BUILD_TYPE": "Release" } },
+
+    { "name": "windows-arm64-debug",   "displayName": "Windows ARM64 Debug",   "inherits": "windows-arm64", "cacheVariables": { "CMAKE_BUILD_TYPE": "Debug" } },
+    { "name": "windows-arm64-release", "displayName": "Windows ARM64 Release", "inherits": "windows-arm64", "cacheVariables": { "CMAKE_BUILD_TYPE": "Release" } },
+
+    { "name": "linux-x64-debug",      "displayName": "Linux x64 Debug",       "inherits": "linux-x64",      "cacheVariables": { "CMAKE_BUILD_TYPE": "Debug" } },
+    { "name": "linux-x64-release",    "displayName": "Linux x64 Release",     "inherits": "linux-x64",      "cacheVariables": { "CMAKE_BUILD_TYPE": "Release" } },
+
+    { "name": "linux-arm64-debug",    "displayName": "Linux arm64 Debug",     "inherits": "linux-arm64",    "cacheVariables": { "CMAKE_BUILD_TYPE": "Debug" } },
+    { "name": "linux-arm64-release",  "displayName": "Linux arm64 Release",   "inherits": "linux-arm64",    "cacheVariables": { "CMAKE_BUILD_TYPE": "Release" } }
+  ]
+}
